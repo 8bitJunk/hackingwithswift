@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 class DetailViewController: UIViewController {
     @IBOutlet weak var detailImageView: UIImageView!
@@ -32,6 +33,21 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: "shareTapped")
+    }
+    
+    func shareTapped() {
+        // use for things like airdrop and airprint etc
+//        let activity = UIActivityViewController(activityItems: [detailImageView.image!], applicationActivities: [])
+//        presentViewController(activity, animated: true, completion: nil)
+        
+        // use for specific social service like facebook or twitter, set fields on service like urls and images
+        let social = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        social.setInitialText("Hello World!")
+        social.addImage(detailImageView.image!)
+        social.addURL(NSURL(string: "http://www.photolib.noaa.gov/nssl"))
+        presentViewController(social, animated: true, completion: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
