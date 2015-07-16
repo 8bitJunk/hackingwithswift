@@ -23,6 +23,7 @@ class DetailViewController: UIViewController {
         if let detail = detailItem {
             if let imageView = detailImageView {
                 imageView.image = UIImage(named: detail)
+                self.title = detail
             }
         }
     }
@@ -31,6 +32,16 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.hidesBarsOnTap = true
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.hidesBarsOnTap = false
     }
 
     override func didReceiveMemoryWarning() {
