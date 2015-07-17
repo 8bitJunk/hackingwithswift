@@ -1,20 +1,29 @@
 //
 //  MasterViewController.swift
-//  WordScramble
+//  project5
 //
-//  Created by Christopher Paterson on 17/07/2015.
-//  Copyright © 2015 Christopher Paterson. All rights reserved.
+//  Created by Ryan Gibbs on 17/07/2015.
+//  Copyright © 2015 Ryan Gibbs. All rights reserved.
 //
 
 import UIKit
 
 class MasterViewController: UITableViewController {
-
-    var objects = [AnyObject]()
-
+    var answers = [String]()
+    var allWords = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        do {
+            if let startWordsPath = NSBundle.mainBundle().pathForResource("start", ofType: "txt") {
+                if let startWords = try NSString(contentsOfFile: startWordsPath, usedEncoding: nil) {
+                    
+                }
+            }
+        } catch {
+            print("oops")
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -27,7 +36,6 @@ class MasterViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
     // MARK: - Table View
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -35,16 +43,15 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return answers.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
 
-        let object = objects[indexPath.row] as! NSDate
-        cell.textLabel!.text = object.description
+        let object = answers[indexPath.row]
+        cell.textLabel!.text = object
         return cell
     }
-
 }
 
